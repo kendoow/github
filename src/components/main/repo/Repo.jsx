@@ -1,8 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import './repo.scss'
-const Repo = (props) => {
-    const repo = props.repo
+const Repo = ({repo}) => {
   return (
     <div className='repo'>
         <div className="repo-header">

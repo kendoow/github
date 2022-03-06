@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { setCurrentPage } from "../../reducers/reposReducer";
 import { createPages } from "../../utils/pagesCreator";
 import { getRepos } from "../actions/repos";
@@ -9,15 +8,17 @@ import "./main.scss";
 import Repo from "./repo/Repo";
 const Main = () => {
   const dispatch = useDispatch();
+  // массив с items который мы отрисовываем, данные в него попадают из 
   const repos = useSelector((state) => state.repos.items);
   const isFethcing = useSelector((state) => state.repos.isFetching);
+  // задается числом прям тут
   const currentPage = useSelector((state) => state.repos.currentPage);
+  // totalCount берется из repos.js с сервера во время фетчинга и помещаетс я в переменную
   const totalCount = useSelector((state) => state.repos.totalCount);
   const perPage = useSelector((state) => state.repos.perPage);
   const isFetchError = useSelector((state) => state.repos.isFetchError);
   const [searchValue, setSearchValue] = useState("");
   const pagesCount = Math.ceil(totalCount / perPage);
-  let navigate = useNavigate();
   const pages = [];
 
   createPages(pages, pagesCount, currentPage);
